@@ -39,7 +39,7 @@
     });
 
     SIGNOUT_BTN.addEventListener("click", function () {
-        location.href = "profiles.html";
+        location.href = "profiles.html?signout=1";
     });
 
     render();

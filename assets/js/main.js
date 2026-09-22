@@ -447,7 +447,8 @@
         COMMENTS_BTN.addEventListener("click", function () {
             var key = currentEntry && (currentEntry.slug || currentEntry.id);
             if (key) {
-                location.href = "comments.html?movie=" + encodeURIComponent(key);
+                var base = /\/pages\//.test(location.pathname) ? "" : "pages/";
+                location.href = base + "comments.html?movie=" + encodeURIComponent(key);
             }
         });
     }

@@ -7,6 +7,10 @@
         try {
             localStorage.removeItem("cinemoraProfile");
         } catch (e) { /* ignore */ }
+        if (window.Auth) {
+            window.Auth.signOut();
+        }
+        location.href = "Login.html";
     }
     var CARDS = document.getElementById("profile-cards");
     var TITLE = document.getElementById("profile-title");
@@ -91,7 +95,7 @@
                     return;
                 }
                 Profiles.activate(profile.name);
-                location.href = "index.html";
+                location.href = "../index.html";
             };
 
             card.addEventListener("click", enter);

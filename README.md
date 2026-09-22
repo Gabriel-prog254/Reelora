@@ -42,14 +42,18 @@ Live demo: <https://gabriel-prog254.github.io/Reelora/>
 
 | Page             | Purpose                                   |
 | ---------------- | ----------------------------------------- |
-| `index.html`     | Home: hero, trending ranks, rows, search  |
-| `favorites.html` | My List + search                          |
-| `music.html`     | Music search and playback                 |
-| `comments.html`  | Comment threads + free movies             |
-| `profiles.html`  | Profile picker                            |
-| `notifications.html` | Notifications feed                    |
-| `account.html`   | Account & membership                      |
-| `pages/Login.html`, `pages/Sign UP.html` | Auth entry screens |
+| `index.html`     | Home (redirects to Sign In when logged out): hero, trending ranks, rows, search |
+| `pages/Login.html` | Sign In entry screen                   |
+| `pages/Sign UP.html` | Create account screen                 |
+| `pages/favorites.html` | My List + search                     |
+| `pages/music.html`     | Music search and playback             |
+| `pages/comments.html`  | Comment threads + free movies         |
+| `pages/profiles.html`  | Profile picker                        |
+| `pages/notifications.html` | Notifications feed                 |
+| `pages/account.html`   | Account & membership                  |
+
+> The app opens on the Sign In page first. Signing in sets a local session
+> (`cinemoraSignedIn`); guests hitting any other page are redirected there.
 
 ## Run locally
 
