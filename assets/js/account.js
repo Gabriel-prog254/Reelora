@@ -22,12 +22,12 @@
     function render() {
         var me = Profiles ? Profiles.get() : null;
         if (me && PROFILE_LINE) {
-            PROFILE_LINE.textContent = "Active profile: " + me.name + " · you@cinemora.com";
+            PROFILE_LINE.textContent = "Active profile: " + me.name + " \u00B7 you@cinemora.com";
         }
     }
 
     PLAN_BTN.addEventListener("click", function () {
-        toast("This is a demo plan — " + SITE_NAME + " is a student project.");
+        toast("This is a demo plan \u2014 " + SITE_NAME + " is a student project.");
     });
 
     PROFILE_BTN.addEventListener("click", function () {

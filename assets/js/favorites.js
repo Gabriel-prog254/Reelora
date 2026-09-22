@@ -1,5 +1,5 @@
 /*
- * Favorites ("My List") storage layer — shared by every page.
+ * Favorites ("My List") storage layer \u2014 shared by every page.
  *
  * Movies are identified by their unique TMDB id (falling back to the
  * internal slug for offline/static mode), never by title alone.
@@ -27,7 +27,7 @@
     function save() {
         try {
             localStorage.setItem(KEY, JSON.stringify(map));
-        } catch (e) { /* storage unavailable — ignore */ }
+        } catch (e) { /* storage unavailable \u2014 ignore */ }
     }
 
     /* Both the canonical id key and the legacy slug key, so older saved

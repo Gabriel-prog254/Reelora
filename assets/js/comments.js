@@ -295,7 +295,7 @@
         var list = window.Notifications.all();
         list.unshift({
             id: "c" + Date.now().toString(36) + "n",
-            icon: "💬",
+            icon: "\uD83D\uDCAC",
             title: "Comment posted",
             body: "Your comment on '" + (MOVIES[currentSlug] ? MOVIES[currentSlug].title : "") + "' is live.",
             time: Date.now(),

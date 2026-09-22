@@ -1,5 +1,5 @@
 /*
- * TMDB configuration — this is the ONLY place your API key lives.
+ * TMDB configuration \u2014 this is the ONLY place your API key lives.
  * No other file in the project reads hardcoded keys; the data layer
  * (assets/js/api.js) reads everything from window.TMDB_CONFIG.
  *
@@ -17,7 +17,7 @@
  * In that case the placeholder below is ignored.
  *
  * SECURITY NOTE
- * A key in a static site is visible in the browser — that is normal for
+ * A key in a static site is visible in the browser \u2014 that is normal for
  * client-side apps like this student project. Keep it limited to the
  * TMDB developer / public plan, and if you use git, exclude this file
  * (add "assets/js/config.js" to .gitignore) so the key isn't committed.

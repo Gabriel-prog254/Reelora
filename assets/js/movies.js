@@ -1,4 +1,4 @@
-/* Movie data store — each entry is linked to a card via its unique id. */
+/* Movie data store \u2014 each entry is linked to a card via its unique id. */
 
 window.MOVIES = {
     "stranger-things": {
@@ -196,8 +196,8 @@ window.MOVIES = {
         rating: 8.2,
         trailer: "p_PJbmrX4uk",
         movieUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-        cast: ["Úrsula Corberó", "Álvaro Morte", "Pedro Alonso", "Itziar Ituño"],
-        director: "Álex Pina",
+        cast: ["\u00DArsula Corber\u00F3", "\u00C1lvaro Morte", "Pedro Alonso", "Itziar Itu\u00F1o"],
+        director: "\u00C1lex Pina",
         language: "Spanish",
         ageRating: "16+"
     },
@@ -467,7 +467,7 @@ window.MOVIES = {
         poster: "https://archive.org/services/img/plan-9-from-outer-space_zomboo",
         backdrop: "https://archive.org/services/img/plan-9-from-outer-space_zomboo",
         description:
-            "Aliens revive the dead on Earth to stop humanity from developing space weaponry — the famously hilarious cult classic from Ed Wood.",
+            "Aliens revive the dead on Earth to stop humanity from developing space weaponry \u2014 the famously hilarious cult classic from Ed Wood.",
         genres: ["Horror", "Sci-Fi"],
         year: 1959,
         duration: "1h 19m",
@@ -527,7 +527,7 @@ window.MOVIES = {
         poster: "https://archive.org/services/img/santa-claus-conquers-the-martians-1964-by-nicholas-webster",
         backdrop: "https://archive.org/services/img/santa-claus-conquers-the-martians-1964-by-nicholas-webster",
         description:
-            "The Martians kidnap Santa Claus to cheer up their children — a wonderfully absurd holiday classic from 1964.",
+            "The Martians kidnap Santa Claus to cheer up their children \u2014 a wonderfully absurd holiday classic from 1964.",
         genres: ["Comedy", "Sci-Fi"],
         year: 1964,
         duration: "1h 21m",
@@ -547,7 +547,7 @@ window.MOVIES = {
         poster: "https://archive.org/services/img/reefer-madness-1936-by-louis-j.-gasnier",
         backdrop: "https://archive.org/services/img/reefer-madness-1936-by-louis-j.-gasnier",
         description:
-            "A cautionary tale where jazz, marijuana and high school students collide in spectacular fashion — the most rewatched 'educational' film ever made.",
+            "A cautionary tale where jazz, marijuana and high school students collide in spectacular fashion \u2014 the most rewatched 'educational' film ever made.",
         genres: ["Drama", "Comedy"],
         year: 1936,
         duration: "1h 8m",
@@ -567,7 +567,7 @@ window.MOVIES = {
         poster: "https://archive.org/services/img/TheGeneral720p1926",
         backdrop: "https://archive.org/services/img/TheGeneral720p1926",
         description:
-            "During the Civil War, a Southern train engineer chases a stolen locomotive — Buster Keaton's silent masterpiece of brick-for-brick stunt comedy.",
+            "During the Civil War, a Southern train engineer chases a stolen locomotive \u2014 Buster Keaton's silent masterpiece of brick-for-brick stunt comedy.",
         genres: ["Comedy", "Action"],
         year: 1926,
         duration: "1h 15m",
@@ -587,7 +587,7 @@ window.MOVIES = {
         poster: "https://archive.org/services/img/nosferatu_201907",
         backdrop: "https://archive.org/services/img/nosferatu_201907",
         description:
-            "A young real estate agent travels to Transylvania and visits a mysterious count — the eerie 1922 German expressionist vampire horror.",
+            "A young real estate agent travels to Transylvania and visits a mysterious count \u2014 the eerie 1922 German expressionist vampire horror.",
         genres: ["Horror", "Fantasy"],
         year: 1922,
         duration: "1h 34m",
@@ -595,7 +595,7 @@ window.MOVIES = {
         trailer: null,
         movieUrl: null,
         archiveId: "nosferatu_201907",
-        cast: ["Max Schreck", "Greta Schröder", "Alexander Granach", "Ruth Landshoff"],
+        cast: ["Max Schreck", "Greta Schr\u00F6der", "Alexander Granach", "Ruth Landshoff"],
         director: "F. W. Murnau",
         language: "Silent",
         ageRating: null
@@ -607,7 +607,7 @@ window.MOVIES = {
         poster: "https://archive.org/services/img/houseonhauntedhill_201907",
         backdrop: "https://archive.org/services/img/houseonhauntedhill_201907",
         description:
-            "A millionaire offers a group of strangers a fortune to spend one night in a house with a deadly history — Vincent Price at his sinister best.",
+            "A millionaire offers a group of strangers a fortune to spend one night in a house with a deadly history \u2014 Vincent Price at his sinister best.",
         genres: ["Horror", "Thriller"],
         year: 1959,
         duration: "1h 15m",

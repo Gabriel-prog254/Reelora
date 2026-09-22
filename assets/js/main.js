@@ -67,6 +67,9 @@
     var MyList = window.MyList || null;
     var MOVIES_IDS = window.MOVIES_IDS || { movie: {}, tv: {} };
 
+    /* Continue Watching layer (shared continue.js); null on pages without it. */
+    var ContinueWatching = window.ContinueWatching || null;
+
 
     /* ---------- navbar + mobile menu (hamburger + dropdown handled in profile.js) ---------- */
 
@@ -123,7 +126,7 @@
             rating: typeof movie.rating === "number" ? movie.rating : null,
             cast: movie.cast || [],
             director: movie.director || "Unknown",
-            language: movie.language || "—",
+            language: movie.language || "\u2014",
             ageRating: movie.ageRating || null,
             trailerUrl: trailerUrl,
             movieUrl: movie.movieUrl || null,
@@ -168,7 +171,7 @@
         if (!btn) {
             return;
         }
-        btn.textContent = added ? "♥" : "♡";
+        btn.textContent = added ? "\u2665" : "\u2661";
         btn.classList.toggle("favorited", added);
     }
 
@@ -177,7 +180,7 @@
             return;
         }
         var added = isFav(entry.id, entry.slug, entry.type);
-        MODAL_FAV.textContent = added ? "♥  In My List" : "♡  My List";
+        MODAL_FAV.textContent = added ? "\u2665  In My List" : "\u2661  My List";
         MODAL_FAV.classList.toggle("active", added);
     }
 
@@ -207,7 +210,7 @@
 
     function render(view, entry) {
         if (!isCurrent(entry)) {
-            return; /* stale response for an older movie — drop it */
+            return; /* stale response for an older movie \u2014 drop it */
         }
         currentData = view;
 
@@ -226,12 +229,12 @@
             (view.genres && view.genres.length ?
                 "<span>" + esc(view.genres.join(" / ")) + "</span>" : "") +
             (view.rating != null ?
-                '<span class="rating-chip">★ ' + view.rating.toFixed(1) + "</span>" : "");
+                '<span class="rating-chip">\u2605 ' + view.rating.toFixed(1) + "</span>" : "");
 
         MODAL_DESC.textContent = view.description;
         MODAL_GENRE.textContent =
-            view.genres && view.genres.length ? view.genres.join(", ") : "—";
-        MODAL_CAST.textContent = view.cast && view.cast.length ? view.cast.join(", ") : "—";
+            view.genres && view.genres.length ? view.genres.join(", ") : "\u2014";
+        MODAL_CAST.textContent = view.cast && view.cast.length ? view.cast.join(", ") : "\u2014";
         MODAL_DIRECTOR.textContent = view.director;
         MODAL_LANGUAGE.textContent = view.language;
         MODAL_RATING.textContent = view.rating != null ? view.rating.toFixed(1) + " / 10" : "N/A";
@@ -241,7 +244,7 @@
         TRAILER_FRAME.src = "";
         TRAILER_POSTER.src = view.backdrop || view.poster || "";
 
-        /* watch movie — shown when a real movie URL exists, or when the
+        /* watch movie \u2014 shown when a real movie URL exists, or when the
          * free archive.org API can resolve one */
         if (view.movieUrl || view.archiveId || (ArchiveAPI && ArchiveAPI.enabled)) {
             WATCH_BTN.classList.remove("hidden");
@@ -250,6 +253,16 @@
             WATCH_BTN.classList.add("hidden");
             MOVIE_UNAVAILABLE.hidden = false;
         }
+
+        /* \u201CMovie\u201D becomes \u201CResume from mm:ss\u201D when progress exists. */
+        var watchLabel = "\u25B6  Watch Movie";
+        if (ContinueWatching && entry) {
+            var resumeSec = ContinueWatching.resumeSeconds(entry);
+            if (resumeSec > 0) {
+                watchLabel = "\u25B6  Resume from " + fmtTime(resumeSec);
+            }
+        }
+        WATCH_BTN.textContent = watchLabel;
 
         updateModalFav(entry);
 
@@ -332,7 +345,7 @@
 
         var staticUrl = currentData ? currentData.trailerUrl : null;
 
-        /* Not configured — only the static data store is available. */
+        /* Not configured \u2014 only the static data store is available. */
         if (!TMDB.isConfigured() || !entry.id) {
             if (staticUrl) {
                 showTrailer(staticUrl);
@@ -464,7 +477,7 @@
     }
 
     function updatePlayBtn() {
-        CTRL_PLAY.textContent = PLAYER_VIDEO.paused ? "▶" : "⏸";
+        CTRL_PLAY.textContent = PLAYER_VIDEO.paused ? "\u25B6" : "\u23F8";
     }
 
     function updateTime() {
@@ -478,7 +491,7 @@
 
     function updateMuteIcon() {
         CTRL_MUTE.textContent =
-            PLAYER_VIDEO.muted || PLAYER_VIDEO.volume === 0 ? "🔇" : "🔊";
+            PLAYER_VIDEO.muted || PLAYER_VIDEO.volume === 0 ? "\uD83D\uDD07" : "\uD83D\uDD0A";
     }
 
     function togglePlay() {
@@ -508,6 +521,18 @@
         }, 2600);
     }
 
+    /* Restores the saved position as soon as the stream's metadata loads. */
+    function resumeSeekOnce() {
+        if (ContinueWatching && currentEntry) {
+            var rec = ContinueWatching.get(currentEntry);
+            if (rec && isFinite(rec.pos) && rec.pos > 0) {
+                var dur = isFinite(PLAYER_VIDEO.duration) ? PLAYER_VIDEO.duration : 0;
+                PLAYER_VIDEO.currentTime = Math.min(rec.pos, dur > 0 ? dur * 0.99 : rec.pos);
+            }
+        }
+        PLAYER_VIDEO.removeEventListener("loadedmetadata", resumeSeekOnce);
+    }
+
     function startStream(url) {
         PLAYER_STAGE.classList.remove("unavailable-mode");
         PLAYER_UNAVAILABLE.hidden = true;
@@ -516,6 +541,9 @@
         updatePlayBtn();
         updateTime();
         PLAYER_VIDEO.play().catch(function () { /* ignore */ });
+        if (ContinueWatching && currentEntry && ContinueWatching.resumeSeconds(currentEntry) > 0) {
+            PLAYER_VIDEO.addEventListener("loadedmetadata", resumeSeekOnce);
+        }
         showControls();
     }
 
@@ -542,6 +570,11 @@
         PLAYER_TITLE.textContent = view.title;
         document.body.style.overflow = "hidden";
         PLAYER.hidden = false;
+
+        /* Seed Continue Watching metadata so a partial watch can render. */
+        if (ContinueWatching && currentEntry) {
+            ContinueWatching.record(currentEntry, view);
+        }
 
         /* a bundled file always starts right away */
         if (view.movieUrl) {
@@ -589,6 +622,10 @@
     }
 
     function closePlayer() {
+        if (!PLAYER.hidden && currentEntry) {
+            saveProgress();
+            renderContinueWatching();
+        }
         PLAYER.hidden = true;
         PLAYER_STAGE.classList.remove("controls-visible");
         PLAYER_STAGE.classList.remove("unavailable-mode");
@@ -643,17 +680,60 @@
         }
     });
 
+    /* Saves playback progress to Continue Watching (throttled on timeupdate,
+     * immediately on pause). */
+    var saveTimer = null;
+
+    function saveProgress() {
+        if (!currentEntry || !ContinueWatching || PLAYER.hidden) {
+            return;
+        }
+        ContinueWatching.update(
+            currentEntry,
+            PLAYER_VIDEO.currentTime,
+            PLAYER_VIDEO.duration,
+            currentData
+        );
+        ContinueWatching.paintAll();
+    }
+
     PLAYER_VIDEO.addEventListener("play", updatePlayBtn);
-    PLAYER_VIDEO.addEventListener("pause", updatePlayBtn);
-    PLAYER_VIDEO.addEventListener("timeupdate", updateTime);
+
+    PLAYER_VIDEO.addEventListener("pause", function () {
+        updatePlayBtn();
+        if (saveTimer) {
+            clearTimeout(saveTimer);
+            saveTimer = null;
+        }
+        saveProgress();
+        renderContinueWatching();
+    });
+
+    PLAYER_VIDEO.addEventListener("timeupdate", function () {
+        updateTime();
+        if (saveTimer) {
+            return;
+        }
+        saveTimer = setTimeout(function () {
+            saveTimer = null;
+            saveProgress();
+        }, 4000);
+    });
+
     PLAYER_VIDEO.addEventListener("loadedmetadata", function () {
         CTRL_SEEK.max = PLAYER_VIDEO.duration;
         updateTime();
     });
+
     PLAYER_VIDEO.addEventListener("ended", function () {
         updatePlayBtn();
         updateTime();
         showControls();
+        if (currentEntry && ContinueWatching) {
+            ContinueWatching.remove(currentEntry);
+            ContinueWatching.paintAll();
+            renderContinueWatching();
+        }
     });
 
     PLAYER_STAGE.addEventListener("mousemove", showControls);
@@ -729,6 +809,14 @@
 
     var searchTimer = null;
     var lastQuery = "";
+    var activeFilter = "all";
+    var lastResults = [];
+
+    var SEARCH_FILTERS = document.getElementById("search-filters");
+    var SEARCH_SKELETON = document.getElementById("search-skeleton");
+    var SEARCH_EMPTY = document.getElementById("search-empty");
+    var SEARCH_EMPTY_HINT = document.getElementById("search-empty-hint");
+    var SEARCH_CLEAR = document.getElementById("search-clear");
 
     /* Build one card with the exact existing card markup. */
     function buildCard(result) {
@@ -763,15 +851,24 @@
         overlay.className = "card-overlay";
         overlay.innerHTML =
             '<div class="card-buttons">' +
-            '<button class="mini-play">▶</button>' +
-            '<button class="mini-plus">♡</button>' +
-            '<button class="mini-info">ⓘ</button>' +
+            '<button class="mini-play">\u25B6</button>' +
+            '<button class="mini-plus">\u2661</button>' +
+            '<button class="mini-info">\u24D8</button>' +
             "</div>" +
             "<h4>" + esc(result.title) + "</h4>" +
-            '<p class="card-meta">' + esc(metaParts.join(" · ")) + "</p>";
+            '<p class="card-meta">' + esc(metaParts.join(" \u00B7 ")) + "</p>";
         card.appendChild(overlay);
 
         wireCard(card);
+
+        if (ContinueWatching) {
+            ContinueWatching.paintCard(card, ContinueWatching.get({
+                id: result.id,
+                slug: result.slug,
+                type: result.type
+            }));
+        }
+
         return card;
     }
 
@@ -798,34 +895,206 @@
         return results;
     }
 
-    function renderSearchResults(query, results) {
-        if (query !== lastQuery) {
-            return; /* a newer search has started — drop this response */
+    /* ---------- search helpers (skeleton, empty state, filters) ---------- */
+
+    function setSearchLoading() {
+        if (SEARCH_ROW) {
+            SEARCH_ROW.innerHTML = "";
         }
-
-        SEARCH_ROW.innerHTML = "";
-
-        results.forEach(function (result) {
-            SEARCH_ROW.appendChild(buildCard(result));
-        });
-
+        if (SEARCH_STATUS) {
+            SEARCH_STATUS.hidden = true;
+        }
+        if (SEARCH_EMPTY) {
+            SEARCH_EMPTY.hidden = true;
+        }
+        if (SEARCH_FILTERS) {
+            SEARCH_FILTERS.innerHTML = "";
+            SEARCH_FILTERS.hidden = true;
+        }
+        if (SEARCH_SKELETON) {
+            SEARCH_SKELETON.innerHTML = "";
+            for (var i = 0; i < 10; i += 1) {
+                var sh = document.createElement("div");
+                sh.className = "skeleton-card";
+                SEARCH_SKELETON.appendChild(sh);
+            }
+            SEARCH_SKELETON.hidden = false;
+        }
         HOME_SECTIONS.forEach(function (section) {
             section.hidden = true;
         });
-
         SEARCH_SECTION.hidden = false;
-        SEARCH_STATUS.hidden = results.length > 0;
+    }
+
+    function hideSearchLoading() {
+        if (SEARCH_SKELETON) {
+            SEARCH_SKELETON.hidden = true;
+            SEARCH_SKELETON.innerHTML = "";
+        }
+    }
+
+    function showSearchEmpty(hasResults) {
+        var msg = hasResults
+            ? "No titles in this category."
+            : "No results found for your search.";
+        if (SEARCH_STATUS) {
+            SEARCH_STATUS.textContent = msg;
+        }
+        if (SEARCH_EMPTY) {
+            SEARCH_EMPTY.hidden = false;
+            if (SEARCH_EMPTY_HINT) {
+                SEARCH_EMPTY_HINT.textContent = hasResults
+                    ? "Try a different filter, or search for another title."
+                    : "Try a different title or a shorter keyword.";
+            }
+            if (SEARCH_STATUS) {
+                SEARCH_STATUS.hidden = false;
+            }
+        } else if (SEARCH_STATUS) {
+            SEARCH_STATUS.hidden = false;
+        }
+    }
+
+    function passesFilter(result) {
+        if (activeFilter === "all") {
+            return true;
+        }
+        if (activeFilter === "movie") {
+            return result.type !== "tv";
+        }
+        if (activeFilter === "tv") {
+            return result.type === "tv";
+        }
+        if (activeFilter.indexOf("genre:") === 0) {
+            var genre = activeFilter.slice(6);
+            return (result.genres || []).indexOf(genre) !== -1;
+        }
+        return true;
+    }
+
+    /* Applies the active filter to the cached results and re-renders. */
+    function applySearchFilter() {
+        var results = lastResults;
+        SEARCH_ROW.innerHTML = "";
+
+        results.filter(passesFilter).forEach(function (result) {
+            SEARCH_ROW.appendChild(buildCard(result));
+        });
+
+        if (results.length && SEARCH_FILTERS) {
+            SEARCH_FILTERS.hidden = false;
+        }
+
+        if (results.filter(passesFilter).length === 0) {
+            showSearchEmpty(results.length > 0);
+        } else {
+            if (SEARCH_EMPTY) {
+                SEARCH_EMPTY.hidden = true;
+            }
+            if (SEARCH_STATUS) {
+                SEARCH_STATUS.hidden = true;
+            }
+        }
+    }
+
+    /* Builds All / Movies / TV / genre chips from the current results. */
+    function buildFilterChips(results) {
+        if (!SEARCH_FILTERS) {
+            return;
+        }
+        SEARCH_FILTERS.innerHTML = "";
+        if (!results.length) {
+            SEARCH_FILTERS.hidden = true;
+            return;
+        }
+
+        var hasMovie = false;
+        var hasTv = false;
+        var genreCount = {};
+        results.forEach(function (result) {
+            if (result.type === "tv") {
+                hasTv = true;
+            } else {
+                hasMovie = true;
+            }
+            (result.genres || []).slice(0, 3).forEach(function (g) {
+                genreCount[g] = (genreCount[g] || 0) + 1;
+            });
+        });
+
+        var chips = [{ key: "all", label: "All" }];
+        if (hasMovie) {
+            chips.push({ key: "movie", label: "Movies" });
+        }
+        if (hasTv) {
+            chips.push({ key: "tv", label: "TV Shows" });
+        }
+
+        Object.keys(genreCount)
+            .sort(function (a, b) { return genreCount[b] - genreCount[a]; })
+            .slice(0, 8)
+            .forEach(function (g) {
+                chips.push({ key: "genre:" + g, label: g });
+            });
+
+        chips.forEach(function (chip) {
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "search-filter" + (chip.key === activeFilter ? " active" : "");
+            btn.textContent = chip.label;
+            btn.setAttribute("data-key", chip.key);
+            btn.addEventListener("click", function () {
+                activeFilter = chip.key;
+                SEARCH_FILTERS.querySelectorAll(".search-filter").forEach(function (b) {
+                    b.classList.toggle("active", b.getAttribute("data-key") === activeFilter);
+                });
+                applySearchFilter();
+            });
+            SEARCH_FILTERS.appendChild(btn);
+        });
+
+        SEARCH_FILTERS.hidden = false;
+    }
+
+    function renderSearchResults(query, results) {
+        if (query !== lastQuery) {
+            return; /* a newer search has started \u2014 drop this response */
+        }
+
+        hideSearchLoading();
+        lastResults = results;
+        activeFilter = "all";
+        buildFilterChips(results);
+        applySearchFilter();
     }
 
     function showHome() {
         lastQuery = "";
+        activeFilter = "all";
+        lastResults = [];
+        hideSearchLoading();
 
         SEARCH_SECTION.hidden = true;
         SEARCH_ROW.innerHTML = "";
 
+        if (SEARCH_FILTERS) {
+            SEARCH_FILTERS.innerHTML = "";
+            SEARCH_FILTERS.hidden = true;
+        }
+        if (SEARCH_EMPTY) {
+            SEARCH_EMPTY.hidden = true;
+        }
+        if (SEARCH_STATUS) {
+            SEARCH_STATUS.hidden = true;
+        }
+
         HOME_SECTIONS.forEach(function (section) {
             section.hidden = false;
         });
+
+        if (CONTINUE_SECTION) {
+            renderContinueWatching();
+        }
     }
 
     function runSearch(rawQuery) {
@@ -837,6 +1106,8 @@
         }
 
         lastQuery = query;
+        activeFilter = "all";
+        setSearchLoading();
 
         if (TMDB.isConfigured()) {
             TMDB.search(query).then(
@@ -890,6 +1161,47 @@
         SEARCH_ICON.addEventListener("click", function () {
             clearTimeout(searchTimer);
             runSearch(SEARCH_INPUT ? SEARCH_INPUT.value : "");
+        });
+    }
+
+    if (SEARCH_CLEAR) {
+        SEARCH_CLEAR.addEventListener("click", function () {
+            if (SEARCH_INPUT) {
+                SEARCH_INPUT.value = "";
+            }
+            runSearch("");
+        });
+    }
+
+
+    /* ---------- Continue Watching ---------- */
+
+    var CONTINUE_SECTION = document.getElementById("continue-watching");
+    var CONTINUE_ROW = document.getElementById("continue-watching-row");
+
+    /* Renders every saved entry into the #continue-watching-row section. */
+    function renderContinueWatching() {
+        if (!CONTINUE_ROW || !ContinueWatching) {
+            return;
+        }
+
+        CONTINUE_ROW.innerHTML = "";
+        var items = ContinueWatching.getAll();
+
+        if (CONTINUE_SECTION) {
+            CONTINUE_SECTION.hidden = items.length === 0;
+        }
+
+        items.forEach(function (rec) {
+            CONTINUE_ROW.appendChild(buildCard({
+                id: rec.id || null,
+                type: rec.type || "movie",
+                slug: rec.slug || null,
+                title: rec.title || "Unknown title",
+                poster: rec.poster || "",
+                year: rec.year || "",
+                genres: rec.genres || []
+            }));
         });
     }
 
@@ -1015,7 +1327,7 @@
                             parts.push(movie.genres[0]);
                         }
                         if (parts.length) {
-                            metaEl.textContent = parts.join(" · ");
+                            metaEl.textContent = parts.join(" \u00B7 ");
                         }
                     }
                 },
@@ -1026,4 +1338,8 @@
 
     populateCards();
     renderMyList();
+    renderContinueWatching();
+    if (ContinueWatching) {
+        ContinueWatching.paintAll();
+    }
 })();

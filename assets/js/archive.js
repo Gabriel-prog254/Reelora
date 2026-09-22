@@ -128,7 +128,7 @@
             rating: null,
             cast: toList(meta.actor).slice(0, 5),
             director: (toList(meta.director)[0] || "") || "Unknown",
-            language: (toList(meta.language)[0] || "") || "—",
+            language: (toList(meta.language)[0] || "") || "\u2014",
             ageRating: null,
             trailer: null,
             archiveId: id
@@ -178,7 +178,7 @@
             return results;
         });
 
-        promise.catch(function () { /* leave searchCache empty — retry next time */ });
+        promise.catch(function () { /* leave searchCache empty \u2014 retry next time */ });
         return promise;
     }
 

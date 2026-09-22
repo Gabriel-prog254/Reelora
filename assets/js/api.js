@@ -145,7 +145,7 @@
             detail.spoken_languages[0].english_name) || "";
         var language = spoken || (detail.original_language
             ? detail.original_language.toUpperCase()
-            : "—");
+            : "\u2014");
 
         return {
             id: detail.id,
@@ -160,7 +160,7 @@
             rating: typeof detail.vote_average === "number" ? detail.vote_average : null,
             cast: cast,
             director: director || "Unknown",
-            language: language || "—",
+            language: language || "\u2014",
             ageRating: null,
             trailer: null
         };

@@ -191,6 +191,69 @@ button {
     background: #e40f26;
 }
 
+/* Search filters (All / Movies / TV / genres) */
+.search-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0 4px;
+}
+
+.search-filter {
+    padding: 6px 14px;
+    border: 1px solid #444;
+    border-radius: 999px;
+    background: transparent;
+    color: #ccc;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.search-filter:hover {
+    border-color: var(--text);
+    color: var(--text);
+}
+
+.search-filter.active {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: #fff;
+}
+
+/* Skeleton loading cards */
+.row-skeleton {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(140px, 17vw, 280px), 1fr));
+    gap: clamp(10px, 1.4vw, 18px);
+    padding: 24px 0;
+}
+
+.row-skeleton[hidden] {
+    display: none;
+}
+
+.skeleton-card {
+    aspect-ratio: 2 / 3;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #222 25%, #2d2d2d 50%, #222 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.3s linear infinite;
+}
+
+@keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+}
+
+/* Search empty state */
+.search-empty-icon {
+    display: block;
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
 .icon-btn {
     position: relative;
     border: none;
@@ -475,6 +538,24 @@ button {
 
 .movie-card:hover img {
     filter: brightness(0.55);
+}
+
+/* Continue Watching progress bar (bottom of the poster) */
+.cw-track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 3;
+}
+
+.cw-track i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--brand);
 }
 
 /* Overlay shown on hover */

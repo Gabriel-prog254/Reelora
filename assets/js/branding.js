@@ -1,5 +1,5 @@
 /*
- * Branding — renders the site name everywhere from the single
+ * Branding \u2014 renders the site name everywhere from the single
  * SITE_NAME constant (assets/js/config.js). No hardcoded brand text.
  *
  * Load after config.js on every page.

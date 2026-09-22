@@ -1,5 +1,5 @@
 /*
- * Profile session + notifications badge — shared by every page.
+ * Profile session + notifications badge \u2014 shared by every page.
  *
  * Keeps the profile list and the active profile in localStorage and updates
  * the navbar avatar/name and the notifications bell dot. Loaded on every
@@ -75,10 +75,10 @@
         var list = read(NOTIFS_KEY, null);
         if (!list || !list.length) {
             var seeded = [
-                { id: "n1", icon: "🎵", title: "Music is live", body: "Stream free song previews in the brand-new Music section.", time: now - 7200e3, read: false },
-                { id: "n2", icon: "✨", title: "10 more movies watchable", body: "Public-domain classics like Night of the Living Dead now stream for free.", time: now - 86400e3, read: false },
-                { id: "n3", icon: "💬", title: "Comments are here", body: "Share your thoughts on any movie in the new Comments section.", time: now - 172800e3, read: true },
-                { id: "n4", icon: "🌸", title: "Welcome to " + SITE_NAME, body: "Browse, comment, save to your list and enjoy!", time: now - 259200e3, read: true }
+                { id: "n1", icon: "\uD83C\uDFB5", title: "Music is live", body: "Stream free song previews in the brand-new Music section.", time: now - 7200e3, read: false },
+                { id: "n2", icon: "\u2728", title: "10 more movies watchable", body: "Public-domain classics like Night of the Living Dead now stream for free.", time: now - 86400e3, read: false },
+                { id: "n3", icon: "\uD83D\uDCAC", title: "Comments are here", body: "Share your thoughts on any movie in the new Comments section.", time: now - 172800e3, read: true },
+                { id: "n4", icon: "\uD83C\uDF38", title: "Welcome to " + SITE_NAME, body: "Browse, comment, save to your list and enjoy!", time: now - 259200e3, read: true }
             ];
             write(NOTIFS_KEY, seeded);
             return seeded;
@@ -118,7 +118,7 @@
         }
     }
 
-    /* Shared navbar behaviour — hamburger, scrolled state, profile dropdown.
+    /* Shared navbar behaviour \u2014 hamburger, scrolled state, profile dropdown.
      * Lives here so every page (even ones without main.js) works the same. */
     function wireNav() {
         var NAVBAR = document.getElementById("navbar");

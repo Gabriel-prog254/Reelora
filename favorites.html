@@ -14,7 +14,7 @@
     <!-- NAVBAR -->
     <header class="navbar" id="navbar">
 
-        <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">&#x2630;</button>
 
         <a href="index.html" class="logo">
             <span class="logo-name" data-brand="name"></span>
@@ -32,11 +32,11 @@
         <div class="nav-right">
 
             <div class="search-box">
-                <span>⌕</span>
+                <span>&#x2315;</span>
                 <input type="text" placeholder="Search">
             </div>
 
-            <a href="notifications.html" class="icon-btn" id="bell" aria-label="Notifications" title="Notifications">🔔<span class="notif-dot" hidden></span></a>
+            <a href="notifications.html" class="icon-btn" id="bell" aria-label="Notifications" title="Notifications">&#x1F514;<span class="notif-dot" hidden></span></a>
 
             <div class="profile">
                 <img src="https://i.pravatar.cc/56?img=12" alt="Profile picture">
@@ -88,7 +88,7 @@
     <div class="modal-backdrop" id="modal" hidden>
         <div class="modal" role="dialog" aria-modal="true" aria-label="Movie details">
 
-            <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+            <button class="modal-close" id="modal-close" aria-label="Close">&#x2715;</button>
 
             <div class="modal-hero" id="modal-hero">
                 <img id="modal-backdrop" src="" alt="Movie backdrop">
@@ -96,7 +96,7 @@
                 <div class="modal-hero-shade">
                     <h3 id="modal-title"></h3>
                     <div class="modal-actions">
-                        <button class="btn-fav" id="modal-fav">♡&nbsp; My List</button>
+                        <button class="btn-fav" id="modal-fav">&#x2661;&nbsp; My List</button>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
 
                 <button class="trailer-box" id="trailer-box" type="button" aria-label="Play trailer">
                     <img class="trailer-poster" id="trailer-poster" src="" alt="Trailer preview">
-                    <span class="trailer-play">▶</span>
+                    <span class="trailer-play">&#x25B6;</span>
                     <span class="trailer-label">Play Trailer</span>
                 </button>
 
@@ -139,8 +139,8 @@
                     allowfullscreen>
                 </iframe>
 
-                <button class="btn-watch" id="watch-btn">▶&nbsp; Watch Movie</button>
-                <button class="btn-watch btn-comments" id="comments-btn">💬&nbsp; Comments</button>
+                <button class="btn-watch" id="watch-btn">&#x25B6;&nbsp; Watch Movie</button>
+                <button class="btn-watch btn-comments" id="comments-btn">&#x1F4AC;&nbsp; Comments</button>
                 <p class="player-unavailable" id="movie-unavailable" hidden>Full movie currently unavailable.</p>
             </div>
 
@@ -152,21 +152,21 @@
         <div class="player-box">
 
             <div class="player-topbar">
-                <button class="player-back" id="player-back" aria-label="Back to movie details">←</button>
+                <button class="player-back" id="player-back" aria-label="Back to movie details">&#x2190;</button>
                 <span class="player-title" id="player-title"></span>
-                <button class="player-close" id="player-close" aria-label="Close player">✕</button>
+                <button class="player-close" id="player-close" aria-label="Close player">&#x2715;</button>
             </div>
 
             <div class="player-stage">
                 <video id="player-video" class="player-video" playsinline></video>
 
                 <div class="player-controls" id="player-controls">
-                    <button id="ctrl-play" class="player-btn" aria-label="Play or pause">⏸</button>
+                    <button id="ctrl-play" class="player-btn" aria-label="Play or pause">&#x23F8;</button>
                     <span id="ctrl-time" class="player-time">0:00</span>
                     <input id="ctrl-seek" class="player-seek" type="range" value="0" min="0" max="100" step="0.1" aria-label="Seek">
                     <input id="ctrl-vol" class="player-vol" type="range" value="1" min="0" max="1" step="0.05" aria-label="Volume">
-                    <button id="ctrl-mute" class="player-btn" aria-label="Mute">🔊</button>
-                    <button id="ctrl-full" class="player-btn" aria-label="Fullscreen">⛶</button>
+                    <button id="ctrl-mute" class="player-btn" aria-label="Mute">&#x1F50A;</button>
+                    <button id="ctrl-full" class="player-btn" aria-label="Fullscreen">&#x26F6;</button>
                 </div>
 
                 <div class="player-unavailable" id="player-unavailable" hidden>
@@ -220,6 +220,7 @@
     <script src="assets/js/archive.js"></script>
     <script src="assets/js/movies.js"></script>
     <script src="assets/js/favorites.js"></script>
+    <script src="assets/js/continue.js"></script>
     <script src="assets/js/profile.js"></script>
     <script src="assets/js/main.js"></script>
 </body>

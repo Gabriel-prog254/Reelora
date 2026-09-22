@@ -45,7 +45,7 @@
             title: "SoundHelix Song " + i,
             artist: FALLBACK_ARTISTS[i % FALLBACK_ARTISTS.length],
             album: "Demo Disc " + (i % 3 + 1),
-            cover: gradientCover(colorsFor(i), "♪"),
+            cover: gradientCover(colorsFor(i), "\u266A"),
             url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-" + i + ".mp3",
             duration: 0
         });
@@ -200,7 +200,7 @@
         dzGet(basePath() + "&index=" + nextIndex, function (err, data) {
             if (err || !data || !data.data || !data.data.length) {
                 if (nextIndex === 0) {
-                    showStatus("Couldn't reach the music service — showing demo tracks.");
+                    showStatus("Couldn't reach the music service \u2014 showing demo tracks.");
                     queue = FALLBACK_TRACKS.slice();
                     nextIndex = queue.length;
                     hasMore = false;
@@ -292,14 +292,14 @@
         var img = document.createElement("img");
         img.loading = "lazy";
         img.alt = esc(track.title);
-        img.src = track.cover || gradientCover(colorsFor(index), "♪");
+        img.src = track.cover || gradientCover(colorsFor(index), "\u266A");
         cover.appendChild(img);
 
         var play = document.createElement("button");
         play.type = "button";
         play.className = "music-track-play";
         play.setAttribute("aria-label", "Play " + esc(track.title));
-        play.textContent = "▶";
+        play.textContent = "\u25B6";
         cover.appendChild(play);
 
         var info = document.createElement("div");
@@ -385,7 +385,7 @@
         var img = document.createElement("img");
         img.loading = "lazy";
         img.alt = esc(album.title);
-        img.src = album.cover || gradientCover(colorsFor(album.id), "♪");
+        img.src = album.cover || gradientCover(colorsFor(album.id), "\u266A");
 
         var h4 = document.createElement("h4");
         h4.textContent = album.title;
@@ -427,7 +427,7 @@
 
         currentIndex = index;
         AUDIO.src = track.url;
-        NP_IMG.src = track.cover || gradientCover(colorsFor(index), "♪");
+        NP_IMG.src = track.cover || gradientCover(colorsFor(index), "\u266A");
         NP_TITLE.textContent = track.title;
         NP_ARTIST.textContent = track.artist;
         PLAYER.hidden = false;
@@ -471,10 +471,10 @@
     });
 
     AUDIO.addEventListener("play", function () {
-        TOGGLE.textContent = "⏸";
+        TOGGLE.textContent = "\u23F8";
     });
     AUDIO.addEventListener("pause", function () {
-        TOGGLE.textContent = "▶";
+        TOGGLE.textContent = "\u25B6";
     });
     AUDIO.addEventListener("ended", function () {
         step(1);
