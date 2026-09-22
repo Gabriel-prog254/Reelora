@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>N - Account</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23E50914'/><text x='32' y='46' font-family='Arial,Helvetica,sans-serif' font-size='42' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>C</text></svg>">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar" id="navbar">
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+
+        <a href="index.html" class="logo">
+            <span class="logo-name" data-brand="name"></span>
+        </a>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tv-shows">TV Shows</a>
+            <a href="index.html#movies">Movies</a>
+            <a href="index.html#popular">New &amp; Popular</a>
+            <a href="music.html">Music</a>
+            <a href="favorites.html">My List</a>
+        </nav>
+
+        <div class="nav-right">
+
+            <div class="search-box">
+                <span>⌕</span>
+                <input type="text" placeholder="Search">
+            </div>
+
+            <a href="notifications.html" class="icon-btn" id="bell" aria-label="Notifications" title="Notifications">🔔<span class="notif-dot" hidden></span></a>
+
+            <div class="profile">
+                <img src="https://i.pravatar.cc/56?img=12" alt="Profile picture">
+
+                <div class="profile-menu">
+                    <div class="profile-name"></div>
+
+                    <a href="profiles.html">Manage Profiles</a>
+                    <a href="account.html">Account</a>
+                    <a href="#">Help Center</a>
+                    <a href="profiles.html?signout=1">Sign Out</a>
+                </div>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ACCOUNT -->
+    <main class="account-main">
+
+        <h1>Account</h1>
+
+        <div class="acct-card">
+            <div>
+                <h3>Membership &amp; Billing</h3>
+                <p>Standard plan · HD + 4K · Monthly — student demo plan</p>
+            </div>
+            <button class="acct-edit" id="plan-btn">Manage plan</button>
+        </div>
+
+        <div class="acct-card">
+            <div>
+                <h3>Profile</h3>
+                <p id="account-profile">Watching as someone@cinemora.com</p>
+            </div>
+            <button class="acct-edit" id="profile-btn">Manage profiles</button>
+        </div>
+
+        <div class="acct-card">
+            <div>
+                <h3>Settings</h3>
+                <p>Notifications, playback, privacy and devices</p>
+            </div>
+            <button class="acct-edit" id="notif-btn">Notifications</button>
+        </div>
+
+        <div class="acct-card">
+            <div>
+                <h3>Sign Out</h3>
+                <p>Switch account or return to the profile picker</p>
+            </div>
+            <button class="acct-edit" id="signout-btn">Sign out</button>
+        </div>
+
+    </main>
+
+
+    <!-- TOAST -->
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/branding.js"></script>
+    <script src="assets/js/profile.js"></script>
+    <script src="assets/js/account.js"></script>
+</body>
+</html>

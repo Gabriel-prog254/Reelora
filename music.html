@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>N - Music</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23E50914'/><text x='32' y='46' font-family='Arial,Helvetica,sans-serif' font-size='42' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>C</text></svg>">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar" id="navbar">
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+
+        <a href="index.html" class="logo">
+            <span class="logo-name" data-brand="name"></span>
+        </a>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tv-shows">TV Shows</a>
+            <a href="index.html#movies">Movies</a>
+            <a href="index.html#popular">New &amp; Popular</a>
+            <a href="music.html" class="active">Music</a>
+            <a href="favorites.html">My List</a>
+        </nav>
+
+        <div class="nav-right">
+
+            <a href="notifications.html" class="icon-btn" id="bell" aria-label="Notifications" title="Notifications">🔔<span class="notif-dot" hidden></span></a>
+
+            <div class="profile">
+                <img src="https://i.pravatar.cc/56?img=12" alt="Profile picture">
+
+                <div class="profile-menu">
+                    <div class="profile-name"></div>
+
+                    <a href="profiles.html">Manage Profiles</a>
+                    <a href="account.html">Account</a>
+                    <a href="#">Help Center</a>
+                    <a href="profiles.html?signout=1">Sign Out</a>
+                </div>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MUSIC -->
+    <main class="music-page">
+
+        <section class="music-hero">
+            <h1>Music</h1>
+            <p>Stream free song previews, discover the charts and search your favourite artists.</p>
+
+            <div class="music-toolbar">
+                <div class="music-search">
+                    <span>⌕</span>
+                    <input type="text" id="music-search" placeholder="Search songs or artists">
+                </div>
+                <div class="genre-chips" id="genre-chips"></div>
+            </div>
+        </section>
+
+        <section class="music-section" id="music-section">
+            <h2 id="music-section-title">Trending Now</h2>
+            <div class="music-grid" id="music-grid"></div>
+            <button type="button" class="btn-load" id="music-load" hidden>Load more tracks</button>
+            <p class="music-status" id="music-status" hidden></p>
+        </section>
+
+        <section class="music-section music-albums" id="music-albums-section" hidden>
+            <h2>Top Albums</h2>
+            <div class="music-albums-row" id="music-albums"></div>
+        </section>
+
+    </main>
+
+
+    <!-- PLAYER BAR -->
+    <footer class="music-player" id="music-player" hidden>
+        <div class="np-left">
+            <img id="np-img" alt="">
+            <div class="np-info">
+                <h4 id="np-title"></h4>
+                <span id="np-artist"></span>
+            </div>
+        </div>
+
+        <div class="np-center">
+            <div class="np-buttons">
+                <button type="button" id="np-prev" aria-label="Previous track">⏮</button>
+                <button type="button" class="np-toggle" id="np-toggle" aria-label="Play or pause">▶</button>
+                <button type="button" id="np-next" aria-label="Next track">⏭</button>
+            </div>
+            <div class="np-timeline">
+                <span id="np-time">0:00</span>
+                <input type="range" id="np-seek" min="0" max="100" value="0" aria-label="Seek">
+                <span id="np-dur">0:00</span>
+            </div>
+        </div>
+
+        <div class="np-right">
+            <span>🔊</span>
+            <input type="range" id="np-vol" min="0" max="100" value="75" aria-label="Volume">
+        </div>
+    </footer>
+
+    <audio id="music-audio" preload="none"></audio>
+
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/branding.js"></script>
+    <script src="assets/js/profile.js"></script>
+    <script src="assets/js/music.js"></script>
+</body>
+</html>

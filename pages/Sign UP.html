@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>N - Sign Up</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23E50914'/><text x='32' y='46' font-family='Arial,Helvetica,sans-serif' font-size='42' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>C</text></svg>">
+    <link rel="stylesheet" href="../assets/css/sign up.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="signup-header">
+        <a href="../index.html" class="logo">
+            <span class="logo-name" data-brand="name"></span>
+        </a>
+
+        <a href="Login.html" class="signin-link">Sign In</a>
+    </header>
+
+
+    <!-- SIGN UP FORM -->
+    <main class="signup-container">
+
+        <div class="signup-box">
+
+            <h1>Create an account</h1>
+
+            <p class="subtitle">
+                Enter your details to create your <span data-brand="name"></span> account.
+            </p>
+
+            <form action="Login.html">
+
+                <label for="fullname">Full name</label>
+                <input
+                    id="fullname"
+                    type="text"
+                    placeholder="Full name"
+                    required
+                >
+
+                <label for="email">Email address</label>
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Email address"
+                    required
+                >
+
+                <label for="password">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+                <label for="confirm">Confirm password</label>
+                <input
+                    id="confirm"
+                    type="password"
+                    placeholder="Repeat your password"
+                    required
+                >
+
+                <button type="submit">Sign Up</button>
+
+            </form>
+
+            <p class="already-account">
+                Already have an account?
+                <a href="Login.html">Sign in now.</a>
+            </p>
+
+            <p class="terms">
+                By signing up, you agree to our
+                <a href="#">Terms of Use</a>
+                and
+                <a href="#">Privacy Policy</a>.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="signup-footer">
+
+        <p>Questions? Contact us.</p>
+
+        <div class="footer-links">
+            <a href="#">FAQ</a>
+            <a href="#">Help Center</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Privacy</a>
+            <a href="#">Cookie Preferences</a>
+            <a href="#">Corporate Information</a>
+        </div>
+
+        <button class="service-code">Service Code</button>
+
+    </footer>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/branding.js"></script>
+</body>
+</html>

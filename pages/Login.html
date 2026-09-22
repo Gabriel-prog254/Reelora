@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>N - Sign In</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23E50914'/><text x='32' y='46' font-family='Arial,Helvetica,sans-serif' font-size='42' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>C</text></svg>">
+    <link rel="stylesheet" href="../assets/css/login.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="login-header">
+        <a href="../index.html" class="logo">
+            <span class="logo-name" data-brand="name"></span>
+        </a>
+    </header>
+
+
+    <!-- LOGIN FORM -->
+    <main class="login-container">
+
+        <div class="login-box">
+
+            <h1>Sign In</h1>
+
+            <form action="../index.html">
+
+                <label for="email">Email or phone number</label>
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="email@example.com"
+                    required
+                >
+
+                <label for="password">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Your password"
+                    required
+                >
+
+                <button type="submit">Sign In</button>
+
+                <div class="login-options">
+                    <label>
+                        <input type="checkbox" checked>
+                        Remember me
+                    </label>
+
+                    <a href="#">Need help?</a>
+                </div>
+
+            </form>
+
+            <div class="signup-text">
+                <p>
+                    New to <span data-brand="name"></span>?
+                    <a href="Sign%20UP.html">Sign up now.</a>
+                </p>
+
+                <small>
+                    This page is protected by Google reCAPTCHA to ensure
+                    you're not a bot.
+                </small>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="login-footer">
+
+        <p>Questions? Contact us.</p>
+
+        <div class="footer-links">
+            <a href="#">FAQ</a>
+            <a href="#">Help Center</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Privacy</a>
+            <a href="#">Cookie Preferences</a>
+            <a href="#">Corporate Information</a>
+        </div>
+
+        <button class="service-code">Service Code</button>
+
+    </footer>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/branding.js"></script>
+</body>
+</html>

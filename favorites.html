@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>N - My List</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23E50914'/><text x='32' y='46' font-family='Arial,Helvetica,sans-serif' font-size='42' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>C</text></svg>">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar" id="navbar">
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+
+        <a href="index.html" class="logo">
+            <span class="logo-name" data-brand="name"></span>
+        </a>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tv-shows">TV Shows</a>
+            <a href="index.html#movies">Movies</a>
+            <a href="index.html#popular">New &amp; Popular</a>
+            <a href="music.html">Music</a>
+            <a href="favorites.html" class="active">My List</a>
+        </nav>
+
+        <div class="nav-right">
+
+            <div class="search-box">
+                <span>⌕</span>
+                <input type="text" placeholder="Search">
+            </div>
+
+            <a href="notifications.html" class="icon-btn" id="bell" aria-label="Notifications" title="Notifications">🔔<span class="notif-dot" hidden></span></a>
+
+            <div class="profile">
+                <img src="https://i.pravatar.cc/56?img=12" alt="Profile picture">
+
+                <div class="profile-menu">
+                    <div class="profile-name"></div>
+
+                    <a href="profiles.html">Manage Profiles</a>
+                    <a href="account.html">Account</a>
+                    <a href="#">Help Center</a>
+                    <a href="profiles.html?signout=1">Sign Out</a>
+                </div>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+    <main class="main-content" style="margin-top: 100px;">
+
+        <!-- MY LIST -->
+        <section class="movie-section" id="my-list">
+            <h2>My List</h2>
+
+            <div class="movie-row" id="my-list-row" hidden></div>
+
+            <div class="my-list-empty" id="my-list-empty" hidden>
+                <p class="search-status">No favorite movies yet.</p>
+                <a class="btn-browse" href="index.html">Browse Movies</a>
+            </div>
+        </section>
+
+
+        <!-- SEARCH RESULTS -->
+        <section class="movie-section" id="search-results" hidden>
+            <h2>Search Results</h2>
+
+            <div class="movie-row" id="search-results-row"></div>
+
+            <p class="search-status" id="search-status" hidden>Movie not found</p>
+        </section>
+
+    </main>
+
+
+    <!-- MOVIE DETAILS -->
+    <div class="modal-backdrop" id="modal" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-label="Movie details">
+
+            <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+
+            <div class="modal-hero" id="modal-hero">
+                <img id="modal-backdrop" src="" alt="Movie backdrop">
+
+                <div class="modal-hero-shade">
+                    <h3 id="modal-title"></h3>
+                    <div class="modal-actions">
+                        <button class="btn-fav" id="modal-fav">♡&nbsp; My List</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-status" id="modal-status" hidden>
+                <div class="spinner"></div>
+                <p>Loading movie details...</p>
+            </div>
+
+            <div class="modal-error" id="modal-error" hidden>
+                <p>We could not load the movie details right now.</p>
+                <button class="btn-retry" id="modal-retry">Try Again</button>
+            </div>
+
+            <div class="modal-body">
+                <p class="modal-meta" id="modal-meta"></p>
+                <p class="modal-description" id="modal-description"></p>
+
+                <ul class="modal-facts">
+                    <li><strong>Genre:</strong> <span id="modal-genre"></span></li>
+                    <li><strong>Cast:</strong> <span id="modal-cast"></span></li>
+                    <li><strong>Director:</strong> <span id="modal-director"></span></li>
+                    <li><strong>Language:</strong> <span id="modal-language"></span></li>
+                    <li><strong>Rating:</strong> <span id="modal-rating"></span></li>
+                </ul>
+            </div>
+
+            <div class="trailer-section" id="trailer-section">
+                <h4 class="trailer-title">Trailer</h4>
+
+                <button class="trailer-box" id="trailer-box" type="button" aria-label="Play trailer">
+                    <img class="trailer-poster" id="trailer-poster" src="" alt="Trailer preview">
+                    <span class="trailer-play">▶</span>
+                    <span class="trailer-label">Play Trailer</span>
+                </button>
+
+                <iframe class="trailer-frame" id="trailer-frame"
+                    src=""
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+
+                <button class="btn-watch" id="watch-btn">▶&nbsp; Watch Movie</button>
+                <button class="btn-watch btn-comments" id="comments-btn">💬&nbsp; Comments</button>
+                <p class="player-unavailable" id="movie-unavailable" hidden>Full movie currently unavailable.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MOVIE PLAYER -->
+    <div class="player-backdrop" id="player" hidden>
+        <div class="player-box">
+
+            <div class="player-topbar">
+                <button class="player-back" id="player-back" aria-label="Back to movie details">←</button>
+                <span class="player-title" id="player-title"></span>
+                <button class="player-close" id="player-close" aria-label="Close player">✕</button>
+            </div>
+
+            <div class="player-stage">
+                <video id="player-video" class="player-video" playsinline></video>
+
+                <div class="player-controls" id="player-controls">
+                    <button id="ctrl-play" class="player-btn" aria-label="Play or pause">⏸</button>
+                    <span id="ctrl-time" class="player-time">0:00</span>
+                    <input id="ctrl-seek" class="player-seek" type="range" value="0" min="0" max="100" step="0.1" aria-label="Seek">
+                    <input id="ctrl-vol" class="player-vol" type="range" value="1" min="0" max="1" step="0.05" aria-label="Volume">
+                    <button id="ctrl-mute" class="player-btn" aria-label="Mute">🔊</button>
+                    <button id="ctrl-full" class="player-btn" aria-label="Fullscreen">⛶</button>
+                </div>
+
+                <div class="player-unavailable" id="player-unavailable" hidden>
+                    <p>Full movie currently unavailable.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
+            </a>
+            <a href="#" aria-label="X">
+                <svg viewBox="0 0 24 24"><path d="M18.24 2.25h3.31l-7.23 8.26L22.83 21.75h-6.66l-5.22-6.82-5.97 6.82H1.66l7.73-8.84L1.17 2.25h6.83l4.71 6.23 5.53-6.23zm-1.16 17.52h1.83L7.01 4.13H5.05l12.03 15.64z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zm0 1.8c-3.15 0-3.5.01-4.74.07-2.43.11-3.55 1.23-3.66 3.66-.05 1.24-.07 1.59-.07 4.74s.02 3.5.07 4.74c.11 2.42 1.22 3.55 3.66 3.66 1.24.05 1.59.07 4.74.07s3.5-.02 4.74-.07c2.43-.11 3.55-1.23 3.66-3.66.05-1.24.07-1.59.07-4.74s-.02-3.5-.07-4.74c-.11-2.42-1.24-3.55-3.66-3.66zm0 3.06a5.13 5.13 0 1 1 0 10.26 5.13 5.13 0 0 1 0-10.26zm0 8.46a3.33 3.33 0 1 0 0-6.66 3.33 3.33 0 0 0 0 6.66zm5.34-8.67a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+            </a>
+        </div>
+
+        <div class="footer-links">
+            <a href="#">Audio and Subtitles</a>
+            <a href="#">Media Center</a>
+            <a href="#">Privacy</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Help Center</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Preferences</a>
+            <a href="#">Corporate Information</a>
+        </div>
+
+        <button class="service-code">Service Code</button>
+
+        <p class="copyright" data-brand="copyright"></p>
+
+    </footer>
+
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/branding.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/archive.js"></script>
+    <script src="assets/js/movies.js"></script>
+    <script src="assets/js/favorites.js"></script>
+    <script src="assets/js/profile.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
