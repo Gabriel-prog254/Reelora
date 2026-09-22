@@ -11,7 +11,7 @@
 (function () {
     "use strict";
 
-    var SITE_NAME = window.SITE_NAME || "CINEMORA";
+    var SITE_NAME = window.SITE_NAME || "Reelora";
 
     var PROFILES_KEY = "cinemoraProfiles";
     var ACTIVE_KEY = "cinemoraProfile";

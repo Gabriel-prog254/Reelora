@@ -32,7 +32,7 @@
         <div class="nav-right">
 
             <div class="search-box">
-                <span>&#x2315;</span>
+                <span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg></span>
                 <input type="text" placeholder="Search">
             </div>
 
@@ -66,7 +66,9 @@
             <div class="movie-row" id="my-list-row" hidden></div>
 
             <div class="my-list-empty" id="my-list-empty" hidden>
+                <span class="search-empty-icon">&#x1F3AC;</span>
                 <p class="search-status">No favorite movies yet.</p>
+                <p id="my-list-empty-hint">Tap the heart on any title to save it here for later.</p>
                 <a class="btn-browse" href="index.html">Browse Movies</a>
             </div>
         </section>
@@ -76,9 +78,18 @@
         <section class="movie-section" id="search-results" hidden>
             <h2>Search Results</h2>
 
+            <div class="search-filters" id="search-filters" hidden></div>
+
             <div class="movie-row" id="search-results-row"></div>
 
-            <p class="search-status" id="search-status" hidden>Movie not found</p>
+            <div class="row-skeleton" id="search-skeleton" hidden></div>
+
+            <div class="my-list-empty" id="search-empty" hidden>
+                <span class="search-empty-icon">&#x1F50D;</span>
+                <p class="search-status" id="search-status"></p>
+                <p id="search-empty-hint">Try a different title or a shorter keyword.</p>
+                <button class="btn-browse" id="search-clear" type="button">Clear Search</button>
+            </div>
         </section>
 
     </main>
@@ -161,12 +172,12 @@
                 <video id="player-video" class="player-video" playsinline></video>
 
                 <div class="player-controls" id="player-controls">
-                    <button id="ctrl-play" class="player-btn" aria-label="Play or pause">&#x23F8;</button>
+                    <button id="ctrl-play" class="player-btn" aria-label="Play or pause"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button>
                     <span id="ctrl-time" class="player-time">0:00</span>
                     <input id="ctrl-seek" class="player-seek" type="range" value="0" min="0" max="100" step="0.1" aria-label="Seek">
                     <input id="ctrl-vol" class="player-vol" type="range" value="1" min="0" max="1" step="0.05" aria-label="Volume">
-                    <button id="ctrl-mute" class="player-btn" aria-label="Mute">&#x1F50A;</button>
-                    <button id="ctrl-full" class="player-btn" aria-label="Fullscreen">&#x26F6;</button>
+<button id="ctrl-mute" class="player-btn" aria-label="Mute"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9v6h4l5 5V4L7 9H3zM13.5 12a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 13.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg></button>
+                <button id="ctrl-full" class="player-btn" aria-label="Fullscreen"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 14H5v5h5v-2H7v-3zM5 10h2V7h3V5H5v5zM17 17h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
                 </div>
 
                 <div class="player-unavailable" id="player-unavailable" hidden>

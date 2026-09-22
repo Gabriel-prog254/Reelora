@@ -1,10 +1,10 @@
-# CINEMORA / Reelora
+# Reelora
 
 A Netflix-style streaming UI built with plain HTML, CSS, and JavaScript.
 No frameworks, no build step, no backend. Everything runs in the browser
 and persists locally via localStorage.
 
-[+] Live demo: <https://gabriel-prog254.github.io/Reelora/>
+Live demo: <https://gabriel-prog254.github.io/Reelora/>
 
 ![Home desktop](screenshots/home.png)
 

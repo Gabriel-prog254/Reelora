@@ -24,7 +24,7 @@
  * TMDB developer / public plan, and keep the real key out of git by
  * using assets/js/config.local.js (already added to .gitignore).
  */
-window.SITE_NAME = "CINEMORA";
+window.SITE_NAME = "Reelora";
 
 window.TMDB_CONFIG = {
     apiKey: window.TMDB_API_KEY || window.TMDB_LOCAL_KEY || "REPLACE_WITH_YOUR_API_KEY",

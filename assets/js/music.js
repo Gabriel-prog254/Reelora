@@ -36,7 +36,7 @@
         { label: "Classical", q: "classical" }
     ];
 
-    var FALLBACK_ARTISTS = ["SoundHelix", "Demo Band", "Cinemora Choir"];
+    var FALLBACK_ARTISTS = ["SoundHelix", "Demo Band", "Reelora Choir"];
     var FALLBACK_TRACKS = [];
 
     for (var i = 1; i <= 17; i++) {
@@ -471,10 +471,10 @@
     });
 
     AUDIO.addEventListener("play", function () {
-        TOGGLE.textContent = "\u23F8";
+        TOGGLE.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
     });
     AUDIO.addEventListener("pause", function () {
-        TOGGLE.textContent = "\u25B6";
+        TOGGLE.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg>';
     });
     AUDIO.addEventListener("ended", function () {
         step(1);

@@ -476,8 +476,15 @@
         return m + ":" + (s < 10 ? "0" : "") + s;
     }
 
+/* Inline SVG controls - text glyphs like \u23F8/\u26F6 render as boxes
+     * in many fonts. */
+    var ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg>';
+    var ICON_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+    var ICON_VOL_ON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9v6h4l5 5V4L7 9H3zM13.5 12a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 13.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg>';
+    var ICON_VOL_OFF = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.9 8.9 0 0 0 21 12a9 9 0 0 0-7-8.77v2.06A7 7 0 0 1 19 12zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.96 8.96 0 0 0 3.69-7.13l1.79 1.79L21.73 19 23 17.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>';
+
     function updatePlayBtn() {
-        CTRL_PLAY.textContent = PLAYER_VIDEO.paused ? "\u25B6" : "\u23F8";
+        CTRL_PLAY.innerHTML = PLAYER_VIDEO.paused ? ICON_PAUSE : ICON_PLAY;
     }
 
     function updateTime() {
@@ -490,8 +497,8 @@
     }
 
     function updateMuteIcon() {
-        CTRL_MUTE.textContent =
-            PLAYER_VIDEO.muted || PLAYER_VIDEO.volume === 0 ? "\uD83D\uDD07" : "\uD83D\uDD0A";
+        CTRL_MUTE.innerHTML =
+            PLAYER_VIDEO.muted || PLAYER_VIDEO.volume === 0 ? ICON_VOL_OFF : ICON_VOL_ON;
     }
 
     function togglePlay() {

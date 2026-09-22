@@ -8,9 +8,9 @@
 (function () {
     "use strict";
 
-    var SITE_NAME = window.SITE_NAME || "CINEMORA";
+    var SITE_NAME = window.SITE_NAME || "Reelora";
 
-    /* "N - Watch TV Shows Online" -> "CINEMORA - Watch TV Shows Online" */
+    /* "N - Watch TV Shows Online" -> "Reelora - Watch TV Shows Online" */
     document.title = document.title.replace(/^N(\s*-)?\s*/, SITE_NAME + " - ");
 
     document.querySelectorAll("[data-brand]").forEach(function (el) {
