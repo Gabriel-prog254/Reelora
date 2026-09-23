@@ -1,6 +1,6 @@
 # Reelora
 
-A Netflix-style streaming UI built with plain HTML, CSS, and JavaScript.
+A streaming UI built with plain HTML, CSS, and JavaScript.
 No frameworks, no build step, no backend. Everything runs in the browser
 and persists locally via localStorage.
 
@@ -111,11 +111,15 @@ Per-browser persistence is handled through localStorage:
 
 | Key                  | Purpose                          |
 | -------------------- | -------------------------------- |
-| `netfliXXXFavs`      | My List (favorites)              |
-| `netfliXXXProgress`  | Continue Watching positions      |
-| `netfliXXXComments`  | Comment threads                  |
-| `netfliXXXNotifs`    | Notifications                    |
-| `netfliXXXProfiles`  | Profiles + current profile       |
+| `reeloraFavs`        | My List (favorites)              |
+| `reeloraProgress`    | Continue Watching positions      |
+| `cinemoraComments`   | Comment threads                  |
+| `cinemoraNotifs`     | Notifications                    |
+| `cinemoraProfiles`   | Profile list                     |
+| `cinemoraProfile`    | Active profile                   |
+| `cinemoraSignedIn`   | Session flag                     |
+| `cinemoraSession`    | Active session (name + email)    |
+| `cinemoraAccounts`   | Created accounts                 |
 
 ## Project structure
 

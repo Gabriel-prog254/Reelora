@@ -137,6 +137,7 @@
             e.preventDefault();
 
             var email = signinForm.querySelector("#email").value.trim();
+            var password = signinForm.querySelector("#password").value;
 
             var account = findAccount(email);
             var name = account && account.name
@@ -144,7 +145,7 @@
                 : nameFromEmail(email);
 
             if (!account) {
-                upsertAccount({ name: name, email: email });
+                upsertAccount({ name: name, email: email, password: password });
             }
 
             startSession(name, email);
@@ -158,6 +159,8 @@
         var errorBox = signupForm.querySelector("[data-form-error]");
         var fullname = signupForm.querySelector("#fullname");
         var email = signupForm.querySelector("#email");
+        var password = signupForm.querySelector("#password");
+        var confirm = signupForm.querySelector("#confirm");
 
         function setError(message) {
             if (!errorBox) {
@@ -176,10 +179,19 @@
                 setError("Please enter your name.");
                 return;
             }
+            if (password.value.length < 6) {
+                setError("Password must be at least 6 characters.");
+                return;
+            }
+            if (password.value !== confirm.value) {
+                setError("Passwords do not match.");
+                return;
+            }
 
             upsertAccount({
                 name: name,
-                email: email.value.trim()
+                email: email.value.trim(),
+                password: password.value
             });
 
             startSession(name, email.value);
@@ -187,6 +199,8 @@
             location.href = base + "pages/profiles.html";
         });
 
+        password.addEventListener("input", setError.bind(null, ""));
+        confirm.addEventListener("input", setError.bind(null, ""));
         fullname.addEventListener("input", setError.bind(null, ""));
         email.addEventListener("input", setError.bind(null, ""));
     }

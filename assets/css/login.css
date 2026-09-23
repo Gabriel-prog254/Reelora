@@ -98,7 +98,8 @@ a {
     display: none;
 }
 
-.login-box input[type="email"] {
+.login-box input[type="email"],
+.login-box input[type="password"] {
     width: 100%;
 
     padding: 16px 15px;

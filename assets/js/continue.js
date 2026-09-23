@@ -3,7 +3,7 @@
  *
  * Tracks the playback position of movies/TV so cards can show a progress bar
  * and the player can resume where you left off. Persisted in localStorage
- * under "netfliXXXProgress".
+ * under "reeloraProgress".
  *
  * Exposes: window.ContinueWatching
  */
@@ -11,7 +11,7 @@
 (function () {
     "use strict";
 
-    var KEY = "netfliXXXProgress";
+    var KEY = "reeloraProgress";
     var map = null;
 
     function load() {

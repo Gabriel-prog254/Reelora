@@ -3,7 +3,7 @@
  *
  * Movies are identified by their unique TMDB id (falling back to the
  * internal slug for offline/static mode), never by title alone.
- * The list is persisted in localStorage under "netfliXXXFavs".
+ * The list is persisted in localStorage under "reeloraFavs".
  *
  * Exposes: window.MyList
  */
@@ -11,7 +11,7 @@
 (function () {
     "use strict";
 
-    var KEY = "netfliXXXFavs";
+    var KEY = "reeloraFavs";
     var map = null;
 
     function load() {

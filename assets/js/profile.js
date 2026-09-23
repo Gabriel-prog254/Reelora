@@ -131,10 +131,26 @@
         var NAVBAR = document.getElementById("navbar");
         var HAMBURGER = document.getElementById("hamburger");
         var NAV_LINKS = document.getElementById("nav-links");
+        var SCROLL_TOP = null;
+
+        if (NAVBAR) {
+            SCROLL_TOP = document.createElement("button");
+            SCROLL_TOP.type = "button";
+            SCROLL_TOP.id = "scroll-top";
+            SCROLL_TOP.setAttribute("aria-label", "Back to top");
+            SCROLL_TOP.textContent = "\u2191 Back to top";
+            SCROLL_TOP.addEventListener("click", function () {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+            document.body.appendChild(SCROLL_TOP);
+        }
 
         function onScroll() {
             if (NAVBAR) {
                 NAVBAR.classList.toggle("scrolled", window.scrollY > 40);
+            }
+            if (SCROLL_TOP) {
+                SCROLL_TOP.classList.toggle("show", window.scrollY > 480);
             }
         }
         window.addEventListener("scroll", onScroll, { passive: true });
