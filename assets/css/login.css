@@ -148,6 +148,21 @@ a {
     background-color: var(--red-dark);
 }
 
+.form-error {
+    margin-bottom: 16px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #e87c03;
+    border-radius: 4px;
+
+    background-color: rgba(232, 124, 3, 0.15);
+
+    color: #ffa00a;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
 .login-options {
     display: flex;
     justify-content: space-between;

@@ -74,9 +74,20 @@
 
             var imgBox = document.createElement("span");
             imgBox.className = "pcard-img";
-            imgBox.innerHTML = '<img src="' + profile.img + '" alt="' + profile.name + '">' +
-                '<button class="pcard-remove" aria-label="Remove ' + profile.name + '">\u2715</button>';
-            imgBox.querySelector(".pcard-remove").addEventListener("click", function (e) {
+
+            var img = document.createElement("img");
+            img.src = profile.img;
+            img.alt = profile.name;
+
+            var removeBtn = document.createElement("button");
+            removeBtn.type = "button";
+            removeBtn.className = "pcard-remove";
+            removeBtn.setAttribute("aria-label", "Remove " + profile.name);
+            removeBtn.textContent = "\u2715";
+
+            imgBox.appendChild(img);
+            imgBox.appendChild(removeBtn);
+            removeBtn.addEventListener("click", function (e) {
                 e.stopPropagation();
                 if (Profiles.remove(profile.name)) {
                     render();

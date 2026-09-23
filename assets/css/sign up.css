@@ -167,6 +167,21 @@ a {
     background-color: var(--red-dark);
 }
 
+.form-error {
+    margin-bottom: 16px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #e87c03;
+    border-radius: 4px;
+
+    background-color: rgba(232, 124, 3, 0.15);
+
+    color: #ffa00a;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
 
 /* ============ LOGIN LINK ============ */
 
@@ -201,6 +216,15 @@ a {
 
 .terms a:hover {
     text-decoration: underline;
+}
+
+.form-note {
+    color: #8c8c8c;
+
+    font-size: 12px;
+    line-height: 1.5;
+
+    margin-top: 20px;
 }
 
 

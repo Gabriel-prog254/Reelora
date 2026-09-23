@@ -101,7 +101,14 @@
 
         var nameBlock = document.querySelector(".profile-menu .profile-name");
         if (nameBlock) {
-            nameBlock.innerHTML = '<img src="' + me.img + '" alt="Profile picture"><span>' + me.name + "</span>";
+            nameBlock.innerHTML = "";
+            var pImg = document.createElement("img");
+            pImg.src = me.img;
+            pImg.alt = "Profile picture";
+            var pSpan = document.createElement("span");
+            pSpan.textContent = me.name;
+            nameBlock.appendChild(pImg);
+            nameBlock.appendChild(pSpan);
         }
 
         var label = document.querySelector("[data-profile-label]");
@@ -203,6 +210,42 @@
             });
             write(PROFILES_KEY, list);
             return true;
+        },
+        ensure: function (name) {
+            var clean = String(name || "").trim().slice(0, 20);
+            if (!clean) {
+                return getCurrent();
+            }
+            var list = getProfiles();
+            var i;
+            for (i = 0; i < list.length; i += 1) {
+                if (list[i].name === clean) {
+                    write(ACTIVE_KEY, clean);
+                    updateUI();
+                    return list[i];
+                }
+            }
+            for (i = 0; i < list.length; i += 1) {
+                if (list[i].name === "Default") {
+                    list[i].name = clean;
+                    write(PROFILES_KEY, list);
+                    write(ACTIVE_KEY, clean);
+                    updateUI();
+                    return list[i];
+                }
+            }
+            if (list.length < MAX_PROFILES) {
+                var profile = {
+                    name: clean,
+                    img: avatar(AVATAR_IDS[list.length % AVATAR_IDS.length])
+                };
+                list.unshift(profile);
+                write(PROFILES_KEY, list);
+                write(ACTIVE_KEY, clean);
+                updateUI();
+                return profile;
+            }
+            return getCurrent();
         },
         remove: function (name) {
             var list = getProfiles();

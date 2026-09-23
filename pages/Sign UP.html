@@ -6,7 +6,7 @@
 
     <title>Reelora - Sign Up</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23E50914'/><text x='32' y='46' font-family='Arial,Helvetica,sans-serif' font-size='42' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>C</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23E50914'/><text x='32' y='46' font-family='Arial,Helvetica,sans-serif' font-size='42' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>R</text></svg>">
     <link rel="stylesheet" href="../assets/css/sign up.css">
 </head>
 <body data-auth="guest">
@@ -34,35 +34,45 @@
 
             <form data-signup>
 
+                <p class="form-error" data-form-error hidden></p>
+
                 <label for="fullname">Full name</label>
                 <input
                     id="fullname"
+                    name="fullname"
                     type="text"
                     placeholder="Full name"
+                    autocomplete="name"
                     required
                 >
 
                 <label for="email">Email address</label>
                 <input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="Email address"
+                    autocomplete="email"
                     required
                 >
 
                 <label for="password">Password</label>
                 <input
                     id="password"
+                    name="password"
                     type="password"
                     placeholder="Create a password"
+                    autocomplete="new-password"
                     required
                 >
 
                 <label for="confirm">Confirm password</label>
                 <input
                     id="confirm"
+                    name="confirm"
                     type="password"
                     placeholder="Repeat your password"
+                    autocomplete="new-password"
                     required
                 >
 
@@ -73,6 +83,11 @@
             <p class="already-account">
                 Already have an account?
                 <a href="Login.html">Sign in now.</a>
+            </p>
+
+            <p class="form-note">
+                Demo project &mdash; your account is stored only in this browser.
+                Nothing is ever sent anywhere.
             </p>
 
             <p class="terms">
@@ -108,6 +123,7 @@
     <script src="../assets/js/config.local.js"></script>
     <script src="../assets/js/config.js"></script>
     <script src="../assets/js/branding.js"></script>
+    <script src="../assets/js/profile.js"></script>
     <script src="../assets/js/auth.js"></script>
 </body>
 </html>
