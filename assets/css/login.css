@@ -1,8 +1,8 @@
 /* ============ RESET & BASE ============ */
 
 :root {
-    --red: #e50914;
-    --red-dark: #b20710;
+    --red: #d33a2b;
+    --red-dark: #a92d20;
     --panel: rgba(0, 0, 0, 0.75);
     --muted: #737373;
 }
@@ -56,7 +56,7 @@ a {
     font-weight: 800;
     line-height: 1;
     letter-spacing: 1.5px;
-    color: #e50914;
+    color: #d33a2b;
     display: block;
     white-space: nowrap;
 }

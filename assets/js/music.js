@@ -53,7 +53,7 @@
 
     function colorsFor(i) {
         var palettes = [
-            ["#E50914", "#3b0b47"],
+            ["#d33a2b", "#3b0b47"],
             ["#1db954", "#0a2a4a"],
             ["#7a1fbf", "#1a1a2e"],
             ["#f4880b", "#7a0b2e"],

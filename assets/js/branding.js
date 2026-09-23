@@ -10,7 +10,7 @@
 
     var SITE_NAME = window.SITE_NAME || "Reelora";
 
-    /* "N - Watch TV Shows Online" -> "Reelora - Watch TV Shows Online" */
+    /* Bring the page title in line with the brand name. */
     document.title = document.title.replace(/^N(\s*-)?\s*/, SITE_NAME + " - ");
 
     document.querySelectorAll("[data-brand]").forEach(function (el) {

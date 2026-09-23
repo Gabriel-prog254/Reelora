@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        try {
+            if (localStorage.getItem("cinemoraSignedIn") !== "1") {
+                location.replace("Login.html");
+            }
+        } catch (e) {
+            location.replace("Login.html");
+        }
+    </script>
 
     <title>Reelora - Account</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23E50914'/><text x='32' y='46' font-family='Arial,Helvetica,sans-serif' font-size='42' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>R</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23D33A2B'/><text x='32' y='46' font-family='Arial,Helvetica,sans-serif' font-size='42' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'>R</text></svg>">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/pages.css">
 </head>
