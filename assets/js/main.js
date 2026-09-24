@@ -53,6 +53,7 @@
 
     var SEARCH_INPUT = document.querySelector(".search-box input");
     var SEARCH_ICON = document.querySelector(".search-box span");
+    var SEARCH_BOX = document.querySelector(".search-box");
     var SEARCH_SECTION = document.getElementById("search-results");
     var SEARCH_ROW = document.getElementById("search-results-row");
     var SEARCH_STATUS = document.getElementById("search-status");
@@ -1247,13 +1248,11 @@
         });
 
         document.addEventListener("click", function (e) {
-            if (SEARCH_BOX_hide && !SEARCH_BOX.contains(e.target)) {
+            if (SEARCH_BOX && !SEARCH_BOX.contains(e.target)) {
                 hideSuggestions();
             }
         });
     }
-
-    if (SEARCH_BOX_hide) {
 
     if (SEARCH_ICON) {
         SEARCH_ICON.addEventListener("click", function () {

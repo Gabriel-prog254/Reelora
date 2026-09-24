@@ -127,6 +127,8 @@ button {
 }
 
 .search-box {
+    position: relative;
+
     display: flex;
     align-items: center;
 
@@ -159,6 +161,49 @@ button {
 
 .search-box input::placeholder {
     color: #b3b3b3;
+}
+
+/* Live search suggestions dropdown */
+.search-suggest {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 60;
+
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+    min-width: 240px;
+
+    background-color: rgba(20, 20, 20, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.search-suggest li {
+    padding: 8px 14px;
+    font-size: 14px;
+    color: var(--text);
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-suggest li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-suggest-meta {
+    float: right;
+    margin-left: 12px;
+    color: var(--muted);
+}
+
+.search-suggest-empty {
+    color: var(--muted);
+    cursor: default;
 }
 
 .search-status {
