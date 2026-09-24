@@ -1148,22 +1148,104 @@
     }
 
     if (SEARCH_INPUT) {
+        var SEARCH_SUGGEST = document.getElementById("search-suggest");
+
+        /* Live suggestions from the on-site catalog only. Falls back to a
+         * friendly "no results" row when nothing on the site matches. */
+        function updateSuggestions(value) {
+            if (!SEARCH_SUGGEST) {
+                return;
+            }
+
+            var query = String(value || "").trim();
+            if (!query) {
+                SEARCH_SUGGEST.hidden = true;
+                SEARCH_SUGGEST.innerHTML = "";
+                return;
+            }
+
+            SEARCH_SUGGEST.innerHTML = "";
+            var matches = staticSearch(query).slice(0, 7);
+
+            if (!matches.length) {
+                var none = document.createElement("li");
+                none.className = "search-suggest-empty";
+                none.textContent = "No search results for \u201C" + query + "\u201D";
+                SEARCH_SUGGEST.appendChild(none);
+                SEARCH_SUGGEST.hidden = false;
+                return;
+            }
+
+            var i;
+            for (i = 0; i < matches.length; i += 1) {
+                (function (m) {
+                    var li = document.createElement("li");
+                    li.setAttribute("role", "option");
+
+                    var name = document.createTextNode(m.title);
+                    li.appendChild(name);
+
+                    if (m.year) {
+                        var year = document.createElement("span");
+                        year.className = "search-suggest-meta";
+                        year.textContent = String(m.year);
+                        li.appendChild(year);
+                    }
+
+                    li.addEventListener("click", function () {
+                        SEARCH_INPUT.value = m.title;
+                        SEARCH_SUGGEST.hidden = true;
+                        runSearch(m.title);
+                    });
+
+                    SEARCH_SUGGEST.appendChild(li);
+                })(matches[i]);
+            }
+
+            SEARCH_SUGGEST.hidden = false;
+        }
+
+        function hideSuggestions() {
+            if (SEARCH_SUGGEST) {
+                SEARCH_SUGGEST.hidden = true;
+            }
+        }
+
         SEARCH_INPUT.addEventListener("input", function () {
             var value = SEARCH_INPUT.value;
+            updateSuggestions(value);
+
             clearTimeout(searchTimer);
             searchTimer = setTimeout(function () {
                 runSearch(value);
             }, 300);
         });
 
+        SEARCH_INPUT.addEventListener("focus", function () {
+            updateSuggestions(SEARCH_INPUT.value);
+        });
+
         SEARCH_INPUT.addEventListener("keydown", function (e) {
             if (e.key === "Enter") {
                 e.preventDefault();
                 clearTimeout(searchTimer);
+                hideSuggestions();
                 runSearch(SEARCH_INPUT.value);
+            }
+
+            if (e.key === "Escape") {
+                hideSuggestions();
+            }
+        });
+
+        document.addEventListener("click", function (e) {
+            if (SEARCH_BOX_hide && !SEARCH_BOX.contains(e.target)) {
+                hideSuggestions();
             }
         });
     }
+
+    if (SEARCH_BOX_hide) {
 
     if (SEARCH_ICON) {
         SEARCH_ICON.addEventListener("click", function () {
