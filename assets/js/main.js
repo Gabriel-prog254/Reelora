@@ -56,6 +56,7 @@
     var SEARCH_SECTION = document.getElementById("search-results");
     var SEARCH_ROW = document.getElementById("search-results-row");
     var SEARCH_STATUS = document.getElementById("search-status");
+    var HERO = document.querySelector(".hero");
     var HOME_SECTIONS = Array.prototype.slice
         .call(document.querySelectorAll("main .movie-section"))
         .filter(function (section) { return section.id !== "search-results"; });
@@ -931,6 +932,9 @@
         HOME_SECTIONS.forEach(function (section) {
             section.hidden = true;
         });
+        if (HERO) {
+            HERO.hidden = true;
+        }
         SEARCH_SECTION.hidden = false;
     }
 
@@ -1084,6 +1088,10 @@
 
         SEARCH_SECTION.hidden = true;
         SEARCH_ROW.innerHTML = "";
+
+        if (HERO) {
+            HERO.hidden = false;
+        }
 
         if (SEARCH_FILTERS) {
             SEARCH_FILTERS.innerHTML = "";

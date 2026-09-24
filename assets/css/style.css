@@ -397,6 +397,10 @@ button {
     background-position: center top;
 }
 
+.hero[hidden] {
+    display: none;
+}
+
 .hero-content {
     max-width: 560px;
     margin-top: 90px;
